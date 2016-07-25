@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    var app = angular.module('sns', []);
+    var app = angular.module('sns', ['ngMessages']);
 
     /**
      * 都道府県の一覧

@@ -37,54 +37,55 @@
 </nav>
 <main class="container" ng-controller="RegistrationFormController as registrationFormCtrl">
     <h1>会員登録</h1>
-    <form name="registrationForm" ng-submit="registrationFormCtrl.confirm()">
+    <form name="registrationForm" ng-submit="registrationForm.name.$valid && registrationFormCtrl.confirm()" novalidate>
         <div class="form-group">
             <label class="control-label">
                 氏名<input type="text" id="name-field" name="name" class="form-control" ng-model="registrationFormCtrl.name" required>
             </label>
-            <div role="alert">
-                <div class="text-danger">氏名は必須入力項目です。</div>
+            <div role="alert" ng-show="registrationForm.name.$dirty" ng-messages="registrationForm.name.$error">
+                <div class="text-danger" ng-message="required">氏名は必須入力項目です。</div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">
-                メールアドレス<input type="email" id="email-field" name="email" class="form-control" ng-model="registrationFormCtrl.email">
+                メールアドレス<input type="email" id="email-field" name="email" class="form-control" ng-model="registrationFormCtrl.email" required>
             </label>
-            <div role="alert">
-                <div class="text-danger">メールアドレスは必須入力項目です。</div>
-                <div class="text-danger">メールアドレスの形式が誤っています。</div>
+            <div role="alert" ng-show="registrationForm.email.$dirty" ng-messages="registrationForm.email.$error">
+                <div class="text-danger" ng-message="required">メールアドレスは必須入力項目です。</div>
+                <div class="text-danger" ng-message="email">メールアドレスの形式が誤っています。</div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">
-                パスワード<input type="password" name="password" class="form-control" ng-model="registrationFormCtrl.password">
+                パスワード<input type="password" name="password" class="form-control" ng-model="registrationFormCtrl.password" ng-minlength="8" required>
             </label>
-            <div role="alert">
-                <div class="text-danger">パスワードは必須入力項目です。</div>
-                <div class="text-danger">パスワードは8文字以上で入力してください。</div>
+            <div role="alert" ng-show="registrationForm.password.$dirty" ng-messages="registrationForm.password.$error">
+                <div class="text-danger" ng-message="required">パスワードは必須入力項目です。</div>
+                <div class="text-danger" ng-message="minlength">パスワードは8文字以上で入力してください。</div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">
-                パスワード（確認）<input type="password" name="passwordConfirm" class="form-control" ng-model="registrationFormCtrl.passwordConfirm">
+                パスワード（確認）<input type="password" name="passwordConfirm" class="form-control" ng-model="registrationFormCtrl.passwordConfirm" required>
             </label>
-            <div role="alert">
-                <div class="text-danger">パスワード（確認）は必須入力項目です。</div>
+            <div role="alert" ng-show="registrationForm.passwordConfirm.$dirty"  ng-messages="registrationForm.passwordConfirm.$error">
+                <div class="text-danger" ng-message="required">パスワード（確認）は必須入力項目です。</div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">
                 住所（都道府県）
-                <select name="prefecture" class="form-control" ng-model="registrationFormCtrl.prefecture">
+                <select name="prefecture" class="form-control" ng-model="registrationFormCtrl.prefecture"
+                        ng-options="prefecture.code as prefecture.name for prefecture in registrationFormCtrl.PREFECTURES">
                 </select>
             </label>
         </div>
         <div class="form-group">
             <label class="control-label">
-                生年月日<input type="date" name="birthday" class="form-control" ng-model="registrationFormCtrl.birthday">
+                生年月日<input type="date" name="birthday" class="form-control" ng-model="registrationFormCtrl.birthday" max="{{registrationFormCtrl.now | date:'yyyy-MM-dd'}}">
             </label>
-            <div role="alert">
-                <div class="text-danger">生年月日には過去の日付を入力してください。</div>
+            <div role="alert" ng-show="registrationForm.birthday.$dirty" ng-messages="registrationForm.birthday.$error">
+                <div class="text-danger" ng-message="max">生年月日には過去の日付を入力してください。</div>
             </div>
         </div>
         <div class="form-group">
@@ -102,20 +103,21 @@
             <label class="control-label"><a>個人情報取り扱い規約</a>への同意</label>
             <div class="form-group">
                 <label class="control-label checkbox-inline">
-                    <input type="checkbox" name="agreement" class="checkbox" ng-model="registrationFormCtrl.agreement">同意します。
+                    <input type="checkbox" name="agreement" class="checkbox" ng-model="registrationFormCtrl.agreement" required>同意します。
                 </label>
-                <div role="alert">
-                    <div class="text-danger">会員登録を行うには個人情報取り扱い規約に同意していただく必要があります。</div>
+                <div role="alert" ng-show="registrationForm.agreement.$dirty"  ng-messages="registrationForm.agreement.$error">
+                    <div class="text-danger" ng-message="required">会員登録を行うには個人情報取り扱い規約に同意していただく必要があります。</div>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">確認</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="registrationForm.$invalid">確認</button>
         <button type="reset" class="btn btn-default">取消</button>
     </form>
 </main>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="./bower_components/angular/angular.min.js"></script>
+<script src="./bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="./app.js"></script>
 </body>
 </html>
