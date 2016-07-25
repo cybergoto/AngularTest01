@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" ng-app="sns">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,15 +33,16 @@
         </div>
     </div>
 </nav>
-<main class="container">
+<!-- TimelineController を別名timelineCtrlとしてdiv要素に関連付け -->
+<main class="container" ng-controller="TimelineController as timelineCtrl">
     <h1>タイムライン</h1>
     <form name="messageForm">
         <div class="form-group">
-            <textarea class="form-control" maxlength="140" placeholder="メッセージをどうぞ！"></textarea>
+            <textarea class="form-control" maxlength="140" placeholder="メッセージをどうぞ！"　ng-model="timelineCtrl.message"></textarea>
         </div>
         <div>
             <button class="btn btn-primary">投稿する</button>
-            <span>残りXXX文字</span>
+            <span>残りXXX文字{{timelineCtrl.message}}</span>
         </div>
     </form>
     <table class="table">
@@ -55,5 +56,6 @@
 <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- TODO ここにAnguloarJS本体のスクリプトを組み込む -->
 <script src="./bower_components/angular/angular.min.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>
