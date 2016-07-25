@@ -20,8 +20,8 @@
         };
     }]);
     //Controlle‚ÖService‚ÌˆË‘¶«‚ğ’“ü‚·‚éƒTƒ“ƒvƒ‹
-    app.controller('TimelineController', ['messages','TimelineService', function(messages, timelineService) {
-        this.messages = messages;
+        app.controller('TimelineController', ['messages','TimelineService', function(messages, timelineService) {
+            this.messages = messages;
         this.message = '';
 
         this.postMessage = function(){
