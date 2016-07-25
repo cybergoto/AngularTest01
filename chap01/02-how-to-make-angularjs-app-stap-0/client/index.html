@@ -36,19 +36,19 @@
 <!-- TimelineController を別名timelineCtrlとしてdiv要素に関連付け -->
 <main class="container" ng-controller="TimelineController as timelineCtrl">
     <h1>タイムライン</h1>
-    <form name="messageForm">
+    <form name="messageForm" ng-submit="timelineCtrl.postMessage()">
         <div class="form-group">
-            <textarea class="form-control" maxlength="140" placeholder="メッセージをどうぞ！"　ng-model="timelineCtrl.message"></textarea>
+            <textarea class="form-control" maxlength="140" placeholder="メッセージをどうぞ！" ng-model="timelineCtrl.message"></textarea>
         </div>
         <div>
             <button class="btn btn-primary">投稿する</button>
-            <span>残りXXX文字{{timelineCtrl.message}}</span>
+            <span>残り{{140 - timelineCtrl.message.length}}文字</span>
         </div>
     </form>
     <table class="table">
-        <tr>
-            <td>XXXXXXXXXXXXXXXXXXXXXXX</td>
-            <td style="text-align: right">YYYY/MM/DD</td>
+        <tr ng-repeat="message in timelineCtrl.messages | orderBy:'-postDateTime'">
+            <td>{{message.message}}</td>
+            <td style="text-align: right">{{message.postDateTime | date:'yyyy/MM/dd hh:mm:ss'}}</td>
         </tr>
     </table>
 </main>
