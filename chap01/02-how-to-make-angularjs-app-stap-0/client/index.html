@@ -46,6 +46,8 @@
         </div>
     </form>
     <table class="table">
+        <!-- orderBy（フィルター）の後ろのパラメータ（postDateTime）にスコープ指定がない理由は、左辺が第一パラメータ扱いになっているため省略できる -->
+        <!-- 個人的にはこのように書きたくなってしまう（message.postDateTime） -->
         <tr ng-repeat="message in timelineCtrl.messages | orderBy:'-postDateTime'">
             <td>{{message.message}}</td>
             <td style="text-align: right">{{message.postDateTime | date:'yyyy/MM/dd hh:mm:ss'}}</td>
