@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="sns">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href=".">
+    <title>SNS</title>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SNS</a>
+        </div>
+        <div id="navbar-member" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">タイムライン</a></li>
+                <li><a href="#">検索</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">アカウント</a></li>
+                <li><a>ログアウト</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- TODO ngControllerディレクティブを利用し、<main>要素にTimelineControllerをtimelineCtrlという別名で関連付け -->
+<main class="container">
+    <h1>タイムライン</h1>
+    <!-- TODO ngSubmitディレクティブを利用し、サブミット時にTimelineControllerのpostMessageメソッドを実行するように指定 -->
+    <form name="messageForm">
+        <div class="form-group">
+            <!-- TODO ngModelディレクティブを利用し、TimelineControllerのmessageプロパティに関連付け -->
+            <textarea class="form-control" maxlength="140" placeholder="メッセージをどうぞ！"></textarea>
+        </div>
+        <div>
+            <button class="btn btn-primary">投稿する</button>
+            <!-- TODO 式（Expression）を利用して残り文字数を表示 -->
+            <!-- 残り文字数は140からメッセージの文字数を引いた数 -->
+            <span>残りXXX文字</span>
+        </div>
+    </form>
+    <table class="table">
+        <!-- TODO ngRepeatディレクティブを利用し、messages配列の要素数分だけ繰り返し表示 -->
+        <!-- orderByフィルターを利用し、postDateTimeプロパティの降順（新しい順）に並べ替えて表示 -->
+        <tr>
+            <!-- TODO messageプロパティの値を表示 -->
+            <td>XXXXXXXXXXXXXXXXXXXXXXX</td>
+            <!-- TODO postDateTimeの値を表示 -->
+            <!-- dateフィルターを利用し、'yyyy/MM/dd hh:mm:ss'形式で表示 -->
+            <td style="text-align: right">YYYY/MM/DD</td>
+        </tr>
+    </table>
+</main>
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="./bower_components/angular/angular.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

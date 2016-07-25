@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="sns">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href=".">
+    <title>SNS</title>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SNS</a>
+        </div>
+        <div id="navbar-member" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">タイムライン</a></li>
+                <li><a href="#">検索</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">アカウント</a></li>
+                <li><a>ログアウト</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container" ng-controller="TimelineController as timelineCtrl">
+    <h1>タイムライン</h1>
+    <form name="messageForm" ng-submit="timelineCtrl.postMessage()">
+        <div class="form-group">
+            <textarea class="form-control" maxlength="140" placeholder="メッセージをどうぞ！" ng-model="timelineCtrl.message"></textarea>
+        </div>
+        <div>
+            <button class="btn btn-primary">投稿する</button>
+            <span>残り{{140 - timelineCtrl.message.length}}文字</span>
+        </div>
+    </form>
+    <table class="table">
+        <tr ng-repeat="message in timelineCtrl.messages | orderBy:'-postDateTime'">
+            <td>{{message.message}}</td>
+            <td style="text-align: right">{{message.postDateTime | date:'yyyy/MM/dd hh:mm:ss'}}</td>
+        </tr>
+    </table>
+</main>
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="./bower_components/angular/angular.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

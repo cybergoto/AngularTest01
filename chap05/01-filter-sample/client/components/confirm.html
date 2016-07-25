@@ -1,0 +1,40 @@
+<div class="container" ng-controller="ConfirmController as confirm">
+    <h1>会員登録（確認）</h1>
+    <div class="container">
+        <div class="form-group">
+            <label class="control-label">
+                氏名<output class="form-control" ng-bind="app.member.name"></output>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                メールアドレス<output class="form-control" ng-bind="app.member.email"></output>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                住所（都道府県）
+                <output class="form-control" ng-bind="app.member.prefecture | prefecture"></output>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                生年月日<output class="form-control" ng-bind="app.member.birthday | date:'yyyy/MM/dd'"></output>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">性別</label>
+            <output class="form-control" ng-bind="app.member.gender | gender"></output>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><a>個人情報取り扱い規約</a>への同意</label>
+            <div class="form-group">
+                <label class="control-label checkbox-inline">
+                    <output class="checkbox" ng-bind="app.member.agreement | yesno"></output>
+                </label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="confirm.registration()">登録</button>
+        <button type="button" class="btn btn-default" ng-click="confirm.previous()">戻る</button>
+    </div>
+</div>

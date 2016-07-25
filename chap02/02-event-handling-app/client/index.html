@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="laboratory">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href=".">
+    <title>実験室</title>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">実験室</a>
+        </div>
+    </div>
+</nav>
+<main class="container" ng-controller="EventController as ctrl">
+    <h1 ng-mouseover="ctrl.fire($event)">ここにマウスをあててみて！</h1>
+    <div ng-bind="ctrl.eventInfo"></div>
+</main>
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="./bower_components/angular/angular.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

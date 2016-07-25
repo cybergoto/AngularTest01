@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="sns">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href=".">
+    <title>SNS</title>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./bower_components/angular/angular-csp.css">
+    <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SNS</a>
+        </div>
+        <div id="navbar-member" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">タイムライン</a></li>
+                <li><a href="#">検索</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">アカウント</a></li>
+                <li><a>ログアウト</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="container" ng-controller="RegistrationFormController as registrationFormCtrl">
+    <h1>会員登録</h1>
+    <form name="registrationForm" novalidate ng-submit="registrationForm.$valid && registrationFormCtrl.confirm()">
+        <div class="form-group">
+            <label class="control-label">
+                氏名<input type="text" id="name-field" name="name" class="form-control" ng-model="registrationFormCtrl.name" required>
+            </label>
+            <div ng-show="registrationForm.name.$dirty" ng-messages="registrationForm.name.$error" role="alert">
+                <div class="text-danger" ng-message="required">氏名は必須入力項目です。</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                メールアドレス<input type="email" id="email-field" name="email" class="form-control" ng-model="registrationFormCtrl.email" required>
+            </label>
+            <div ng-show="registrationForm.email.$dirty"  ng-messages="registrationForm.email.$error" role="alert">
+                <div class="text-danger" ng-message="required">メールアドレスは必須入力項目です。</div>
+                <div class="text-danger" ng-message="email">メールアドレスの形式が誤っています。</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                パスワード<input type="password" name="password" class="form-control" ng-model="registrationFormCtrl.password" ng-minlength="8" required>
+            </label>
+            <div ng-show="registrationForm.password.$dirty"  ng-messages="registrationForm.password.$error" role="alert">
+                <div class="text-danger" ng-message="required">パスワードは必須入力項目です。</div>
+                <div class="text-danger" ng-message="minlength">パスワードは8文字以上で入力してください。</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                パスワード（確認）<input type="password" name="passwordConfirm" class="form-control" ng-model="registrationFormCtrl.passwordConfirm" required>
+            </label>
+            <div ng-show="registrationForm.passwordConfirm.$dirty"  ng-messages="registrationForm.passwordConfirm.$error" role="alert">
+                <div class="text-danger" ng-message="required">パスワード（確認）は必須入力項目です。</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                住所（都道府県）
+                <select name="prefecture" class="form-control" ng-model="registrationFormCtrl.prefecture" ng-options="prefecture.code as prefecture.name for prefecture in registrationFormCtrl.PREFECTURES">
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                生年月日<input type="date" name="birthday" class="form-control" ng-model="registrationFormCtrl.birthday" max="{{registrationFormCtrl.now | date:'yyyy-MM-dd'}}">
+            </label>
+            <div ng-show="registrationForm.birthday.$dirty" ng-messages="registrationForm.birthday.$error" role="alert">
+                <div class="text-danger" ng-message="max">生年月日には過去の日付を入力してください。</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">性別</label>
+            <div class="form-group">
+                <label class="control-label radio-inline">
+                    <input type="radio" name="gender" class="radio" ng-model="registrationFormCtrl.gender" value="MALE">男性
+                </label>
+                <label class="control-label radio-inline">
+                    <input type="radio" name="gender" class="radio" ng-model="registrationFormCtrl.gender" value="FEMALE">女性
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><a>個人情報取り扱い規約</a>への同意</label>
+            <div class="form-group">
+                <label class="control-label checkbox-inline">
+                    <input type="checkbox" name="agreement" class="checkbox" required ng-model="registrationFormCtrl.agreement">同意します。
+                </label>
+                <div ng-show="registrationForm.agreement.$dirty"  ng-messages="registrationForm.agreement.$error" role="alert">
+                    <div class="text-danger" ng-message="required">会員登録を行うには個人情報取り扱い規約に同意していただく必要があります。</div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-disabled="registrationForm.$invalid">確認</button>
+        <button type="reset" class="btn btn-default" ng-click="registrationForm.$setPristine()">取消</button>
+    </form>
+</main>
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="./bower_components/angular/angular.min.js"></script>
+<script src="./bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
