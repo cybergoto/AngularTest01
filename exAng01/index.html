@@ -4,21 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>lesson01</title>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./bower_components/angular/angular-csp.css">
+    <link rel="stylesheet" href="./app.css">
 </head>
 <body>
 <main class="container" ng-controller="CalcController as calcCtrl">
-    <form name="calcForm" ng-submit="calcCtrl.calculateParam()">
+    <h1>Lesson1</h1>
+    <form name="calcForm" class="form-horizontal" ng-submit="calcCtrl.name.$valid && calcCtrl.calculateParam()" novalidate>
         <div class="form-group">
-            <input type="text" ng-model="calcCtrl.param1"/>
+            <label class="control-label" for="param1">Param1:</label>
+            <input name="param1" id="param1" type="text" class="form-control" ng-model="calcCtrl.param1" required/>
+        </div>
+        <div role="alert" ng-show="calcForm.param1.$dirty" ng-messages="calcForm.param1.$error">
+            <div class="text-danger" ng-message="required">Param1は必須です</div>
         </div>
         <div class="form-group">
-            <input type="text" ng-model="calcCtrl.param2"/>
+            <label class="control-label" for="param2">Param2:</label>
+            <input name="param2" id="param2" type="text" class="form-control" ng-model="calcCtrl.param2" required/>
         </div>
-        <button class="btn btn-primary">送信</button>
+        <div role="alert" ng-show="calcForm.param2.$dirty" ng-messages="calcForm.param2.$error">
+            <div class="text-danger" ng-message="required">Param2は必須です</div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" ng-disabled="calcForm.$invalid">送信</button>
+        </div>
+        <div class="form-group">
+            答え：{{calcCtrl.result}}
+        </div>
     </form>
-    答え：{{calcCtrl.result}}
 </main>
 <script src="./bower_components/angular/angular.min.js"></script>
+<script src="./bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="./app.js"></script>
 </body>
 </html>

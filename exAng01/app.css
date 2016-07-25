@@ -1,0 +1,6 @@
+@charset "UTF-8";
+input.ng-invalid.ng-dirty,
+select.ng-invalid.ng-dirty,
+textarea.ng-invalid.ng-dirty {
+    background: pink;
+}
