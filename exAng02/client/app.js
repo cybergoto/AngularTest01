@@ -7,8 +7,8 @@
     var app = angular.module('ex02', ['ui.router']);
 
     /*
-    ui.router�̐ݒ�
-    xxxProvider�͒�^
+    ui.routerの設定
+    xxxProviderは定型
      */
     app.config(['$urlRouterProvider', '$stateProvider',
         function ($urlRouterProvier, $stateProvider) {
@@ -30,7 +30,7 @@
     index.html
      */
     app.controller('AppController', [function() {
-
+        this.rootMessage = "main now";
     }]);
 
     /*
