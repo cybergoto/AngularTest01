@@ -16,6 +16,22 @@
         }
     });
 
+    app.directive('custMsg', [function(){
+        return{
+            restrict: 'EA',
+            template: '<button>Hello World!</button>',
+            replace: true,
+            scope: {
+                message: '@message'
+            },
+            link: function (scope, element, attrs, controller, transclude) {
+                element.on('click', function(){
+                    element.text(scope.message);
+                });
+            }
+        }
+    }]);
+
     app.controller('ex05Controller', [function() {
         this.message = "";
     }]);

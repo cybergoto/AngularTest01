@@ -13,6 +13,8 @@
     <div>{{exCon.message | dottext : 20 : "(以下略)"}}</div>
     <div>{{exCon.message | lowercase | dottext : 10 : "..."}}</div>
     <div>{{exCon.message | uppercase | dottext : 10 : "..."}}</div>
+    <!-- カスタムディレクティブ -->
+    <cust-msg message="clicked!"></cust-msg>
 </main>
 <script src="./bower_components/angular/angular.min.js"></script>
 <script src="./app.js"></script>
