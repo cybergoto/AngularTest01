@@ -1,0 +1,24 @@
+<div ng-controller="inputController as inCon">
+    <form name="calcForm" class="form-horizontal" ng-submit="calcForm.$valid && inCon.postCalc()" >
+        <div class="form-group">
+            <label class="control-label">Param1:</label>
+            <input name="param1" type="number" class="form-control" ng-model="inCon.param1" required>
+        </div>
+        <div role="alert" ng-show="calcForm.param1.$dirty" ng-messages="calcForm.param1.$error">
+            <div class="text-danger" ng-message="required">Param1は必須です</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Param2:</label>
+            <input name="param2" type="number" class="form-control" ng-model="inCon.param2" required>
+        </div>
+        <div role="alert" ng-show="calcForm.param2.$dirty" ng-messages="calcForm.param2.$error">
+            <div class="text-danger" ng-message="required">Param2は必須です</div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" ng-disabled="calcForm.$invalid">送信</button>
+        </div>
+        <div class="form-group">
+            答え：{{inCon.result}}
+        </div>
+    </form>
+</div>

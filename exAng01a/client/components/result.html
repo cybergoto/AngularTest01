@@ -1,0 +1,13 @@
+<div ng-controller="resultController as resCon">
+    <table class="table table-hover">
+        <thead>
+            <td>Results</td>
+            <td style="text-align: right">Datetime</td>
+        </thead>
+        <tr ng-repeat="result in resCon.results | orderBy:'-postDateTime'">
+            <td>{{result.result}}</td>
+            <td style="text-align: right">{{result.postDateTime | date:'yyyy/MM/dd hh:mm:ss'}}</td>
+        </tr>
+    </table>
+    <a ui-sref="input">戻る</a>
+</div>
