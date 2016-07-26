@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    var app = angular.module('calc', []);
+    var app = angular.module('calc', ['ngMessages']);
 
     app.controller('CalcController', [function() {
         this.param1 = 0;
