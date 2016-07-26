@@ -8,9 +8,11 @@
 <h1>Lesson05 Custom Filter</h1>
 <main>
     <textarea name="param1" id="p1" cols="30" rows="10" ng-model="exCon.message"></textarea>
-    <!-- filterの第一引数はパイプの左辺、コロンの後ろが第二引数 -->
+    <!-- filterの第一引数はパイプの左辺、コロンの後ろが第二、第三引数、パイプで繋げば複数適用も可 -->
     <div>{{exCon.message | dottext : 10 : "..."}}</div>
     <div>{{exCon.message | dottext : 20 : "(以下略)"}}</div>
+    <div>{{exCon.message | lowercase | dottext : 10 : "..."}}</div>
+    <div>{{exCon.message | uppercase | dottext : 10 : "..."}}</div>
 </main>
 <script src="./bower_components/angular/angular.min.js"></script>
 <script src="./app.js"></script>
